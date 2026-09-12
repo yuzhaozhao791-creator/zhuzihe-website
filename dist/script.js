@@ -16,6 +16,6 @@ document.querySelector('#contact-form').addEventListener('submit', async event =
   const status = document.querySelector('#form-status');
   if (!name || !message) { status.textContent = '请填写称呼和留言内容，不能只有空格。'; return; }
   const text = `给 zhuzihe 的留言\n称呼：${name}\n邮箱：${data.get('email')}\n\n${message}`;
-  try { await navigator.clipboard.writeText(text); status.textContent = '留言已复制，尚未发送。接收邮箱补充后即可联系。'; }
-  catch { status.textContent = '浏览器未允许复制，请手动选择并复制你填写的内容。留言尚未发送。'; }
+  window.location.href = 'mailto:zhujustin259@gmail.com?subject=' + encodeURIComponent('来自 ' + name + ' 的网站留言') + '&body=' + encodeURIComponent(text);
+  status.textContent = '已请求打开邮件应用，请在邮件应用中确认发送。如未打开，可直接联系 zhujustin259@gmail.com。';
 });
